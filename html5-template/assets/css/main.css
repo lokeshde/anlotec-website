@@ -409,6 +409,7 @@ input, select, textarea {
 
 		.row > .col-12 {
 			width: 100%;
+			text-align: center;
 		}
 
 		.row > .off-12 {
@@ -1950,6 +1951,7 @@ input, select, textarea {
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
+	form input[type="tel"],
 	form select,
 	form textarea {
 		-webkit-appearance: none;
@@ -1969,6 +1971,7 @@ input, select, textarea {
 		form input[type="text"]:focus,
 		form input[type="email"]:focus,
 		form input[type="password"]:focus,
+		form input[type="tel"]:focus,
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
@@ -1978,6 +1981,7 @@ input, select, textarea {
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
+	form input[type="tel"],
 	form select {
 		line-height: 1em;
 	}
@@ -2275,7 +2279,7 @@ input, select, textarea {
 		padding: 1.5em 0 1.5em 0;
 		z-index: 1;
 		overflow: hidden;
-		background-color: 
+		background-color: rgba(50, 50, 50, 0.5); 
 	}
 
 		#nav > ul {
