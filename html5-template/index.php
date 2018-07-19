@@ -1,9 +1,35 @@
+<?php
+$errors = [];
+$missing = [];
+
+$mailSent = false;
+$suspect = false;
+$success = false;
+
+if (isset($_POST['send'])) {
+	$expected = ['name', 'surname', 'email', 'phone', 'comments'];
+	$required = ['name', 'surname', 'email',  'comments'];
+
+	$to = 'info@anlotec.com';
+	$subject = 'Message from Anlotec';
+	$headers = [];
+	$headers[] = 'From: webmaster@example.com';
+	//$headers[] = 'Cc: another@example.com';
+	$headers[] = 'Content-type: text/plain; charset=utf-8';
+	$authorized = '-finfo@anlotec.com';
+	
+    require './includes/process_mail.php';
+
+	if ($mailSent) {
+	    $success = true;
+		//header('Location: index.php#contactUs');
+		//exit;
+	}
+}
+?>
+
+
 <!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Anlotec</title>
