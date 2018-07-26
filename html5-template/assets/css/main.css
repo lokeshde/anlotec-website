@@ -2483,17 +2483,17 @@ input, select, textarea {
 
 		#footer .copyright {
 			text-align: center;
-			color: rgba(128, 128, 128, 0.75);
+			color: rgb(153, 153, 153);
 			font-size: 0.8em;
 			cursor: default;
 		}
 
 			#footer .copyright a {
-				color: rgba(128, 128, 128, 0.75);
+				color: rgb(153, 153, 153);
 			}
 
 				#footer .copyright a:hover {
-					color: rgba(212, 212, 212, 0.85);
+					color: white;
 				}
 
 /* Carousel */
@@ -3120,3 +3120,10 @@ input, select, textarea {
 					}
 
 	}
+
+.help-block{
+	display:block;
+	margin-top:5px;
+	margin-bottom:10px;
+	color:#737373
+}
