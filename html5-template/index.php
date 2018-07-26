@@ -47,8 +47,7 @@ if (isset($_POST['send'])) {
 				<!-- Inner -->
 					<div class="inner">
 						<header>
-							
-							<h1><a href="index.html" id="logo">Anlotec</a></h1>
+							<h1><a href="#header" id="logo">Anlotec</a></h1>
 							<hr />
 							<p>Solving Problems, Delivering Solutions.</p>
 						</header>
@@ -149,30 +148,72 @@ if (isset($_POST['send'])) {
 
 				<div id="contactUs" class="wrapper">
 					<article id="main" class="container special">
-						<header>
-							<h2>
-								<strong>Contact</strong>
-							</h2>
-						</header>
-						<form method="post" action="#">
+                        <div>
+                            <header>
+                                <h2 style="text-align: center">
+                                    <strong>Contact Us</strong>
+                                </h2>
+                            </header>
+                            <?php if ($_POST && ($suspect || isset($errors['mailfail']))) : ?>
+                                <p class="warning">Sorry, your mail couldn't be sent</p>
+                            <?php elseif ($errors && $missing) : ?>
+                                <p class="warning">Please fix the item(s) indicated</p>
+                            <?php endif; ?>
+                        </div>
+						<form id="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" role="form">
 							<div class="row">
-								<div class="col-6 col-12-mobile">
-									<input type="text" name="name" placeholder="First Name*" />
+                                <div class="form-group col-6 col-12-mobile">
+                                    <input class="form-control" type="text" name="name" placeholder="First Name*" required="required" maxlength="50" data-error="First name is required"
+                                        <?php
+                                        if ($errors || $missing) {
+                                            echo 'value="' .htmlentities($name). '"';
+                                        }
+                                        ?>
+                                    />
+                                    <div class="help-block with-errors"></div>
 								</div>
-								<div class="col-6 col-12-mobile">
-									<input type="text" name="surname" placeholder="Last Name*" />
+                                <div class="form-group col-6 col-12-mobile">
+									<input class="form-control" type="text" name="surname" placeholder="Last Name*" maxlength="50" required="required" data-error="Last name is required"
+                                        <?php
+                                        if ($errors || $missing) {
+                                            echo 'value="' .htmlentities($surname). '"';
+                                        }
+                                        ?>
+                                    />
+                                    <div class="help-block with-errors"></div>
 								</div>
-								<div class="col-6 col-12-mobile">
-									<input type="email" name="email" placeholder="Email*" />
+                                <div class="form-group col-6 col-12-mobile">
+									<input type="email" name="email" placeholder="Email*" class="form-control" maxlength="254" required="required" data-error="Valid email is required"
+                                        <?php
+                                        if ($errors || $missing) {
+                                            echo 'value="' .htmlentities($email). '"';
+                                        }
+                                        ?>
+                                    />
+                                    <div class="help-block with-errors"></div>
 								</div>
-								<div class="col-6 col-12-mobile">
-									<input type="tel" name="Phone" placeholder="Phone Number" pattern="\d{10}" maxlength="10" />
+                                <div class="form-group col-6 col-12-mobile">
+									<input class="form-control" type="tel" name="phone" placeholder="10-digit phone number" pattern="\d{10}" maxlength="10"
+                                        <?php
+                                        if ($errors || $missing) {
+                                            echo 'value="' .htmlentities($phone). '"';
+                                        }
+                                        ?>
+                                    />
+                                    <div class="help-block with-errors"></div>
+								</div>
+                                <div class="form-group col-12">
+									<textarea class="form-control" name="comments" placeholder="Message for us*" required="required" data-error="Please leave us a message" maxlength="1000">
+                                        <?php
+                                        if ($errors || $missing) {
+                                            echo htmlentities($message);
+                                        }
+                                        ?>
+                                    </textarea>
+                                    <div class="help-block with-errors"></div>
 								</div>
 								<div class="col-12">
-									<textarea name="message" placeholder="Message*"></textarea>
-								</div>
-								<div class="col-12">
-									<input type="submit" value="Send Message" />
+									<input name="send" id="send" type="submit" value="Send Message" />
 								</div>
 							</div>
 						</form>
@@ -310,7 +351,24 @@ if (isset($_POST['send'])) {
 								<!-- Copyright -->
 									<div class="copyright">
 										<ul class="menu">
-											<li>&copy; 2018 <a href="http://anlotec.com/">Anlotec.com</a>. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                                            <li>
+                                                <a href="tel:+4109292626">
+                                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                                    (410)929-2626
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="mailto:contact@anlotec.com">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                    contact@anlotec.com
+                                                </a>
+                                            </li>
+											<li>
+                                                &copy; 2018 <a href="http://anlotec.com/">Anlotec.com</a>. All rights reserved.
+                                            </li>
+                                            <li>
+                                                Design: <a href="http://html5up.net">HTML5 UP</a>
+                                            </li>
 										</ul>
 									</div>
 
@@ -331,6 +389,10 @@ if (isset($_POST['send'])) {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	</body>
 </html>
